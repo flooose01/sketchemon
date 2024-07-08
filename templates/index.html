@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pokesketch</title>
+    <script src="{{url_for('static', filename='index.js')}}"></script>
+    <style>
+      body {
+        background-color: #f8f8f8;
+        font-family: "Press Start 2P", cursive;
+      }
+      canvas {
+        border: 1px solid black;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      button {
+        width: 150px;
+        height: 75px;
+      }
+      .btnClass {
+        font-size: x-large;
+      }
+      #btnContainer {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+      #evolDiv {
+        display: flex;
+        flex-direction: column;
+        font-size: x-large;
+      }
+
+      input {
+        font-size: x-large;
+      }
+
+      .pokemon-container {
+        background-color: #fff;
+        border: 4px solid #000;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 4px 4px 0 #888888;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .image-container {
+        background-color: #f0f0f0;
+        border-right: 4px solid #000;
+        padding: 16px;
+        display: inline-block;
+      }
+
+      .pokemon-image {
+        image-rendering: pixelated; /* Makes the image appear pixelated */
+        max-width: none;
+      }
+
+      .description-container {
+        padding: 16px;
+      }
+
+      .pokemon-name {
+        font-size: x-large;
+        margin: 0;
+      }
+
+      .pokemon-description {
+        font-size: x-large;
+        margin-top: 8px;
+        text-align: justify;
+      }
+
+      #images {
+        display: flex;
+        flex-direction: column;
+        font-size: large;
+      }
+
+      /* Add a pixel font */
+      @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+    </style>
+  </head>
+  <body>
+    <h1>Draw anything and generate a Fakemon</h1>
+    <canvas id="sketchCanvas" width="1024" height="1024"></canvas>
+    <div id="btnContainer">
+      <button id="genButton" class="btnClass">Generate Fakemon</button>
+      <button id="clearButton" class="btnClass">Clear Sketch</button>
+      <div id="evolDiv">
+        <label for="evolInput">Number of evolutions (0-2):</label>
+        <input type="number" id="evolInput" max="2" min="0" value="0" />
+      </div>
+    </div>
+    <div id="images">
+      <!-- <div class="pokemon-container">
+        <div class="image-container">
+          <img
+            src="static/evol_1.png"
+            alt="Pokémon Image"
+            class="pokemon-image"
+          />
+        </div>
+        <div class="description-container">
+          <h2 class="pokemon-name">Pikachu</h2>
+          <p class="pokemon-description">
+            Pikachu is an Electric-type Pokémon known for its yellow fur and
+            lightning bolt-shaped tail. It evolves from Pichu when leveled up
+            with high friendship and evolves into Raichu when exposed to a
+            Thunder Stone.
+          </p>
+        </div>
+      </div> -->
+    </div>
+  </body>
+</html>
