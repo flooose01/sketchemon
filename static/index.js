@@ -26,6 +26,19 @@
 
     canvas.addEventListener("mousemove", draw);
 
+    canvas.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      startPosition(e);
+    });
+    canvas.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      endPosition();
+    });
+    canvas.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+      draw(e);
+    });
+
     document.getElementById("genButton").addEventListener("click", () => {
       const dataURL = canvas.toDataURL("image/png");
       const series = parseInt(document.getElementById("evolInput").value) + 1;
@@ -69,16 +82,19 @@
     });
 
     document.getElementById("clearButton").addEventListener("click", () => {
-      // context.clearRect(0, 0, canvas.width, canvas.height);
-      // cleared = true;
-      let card = canvas.toDataURL("image/png");
-      let pokemon = {
-        name: "ember",
-        description:
-          "tthaas idbfanjsdfbk asd bfk asbdfkj asbdfkjasb dfk jabsdkjfbakjsbdfj asdbfkjasdbfkja bsdkjfb akjsdbf kjasbdf kjasbdfkj asdkf bkasdf a",
-      };
-      addPokemon(card, pokemon);
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      cleared = true;
     });
+  }
+
+  function startPosition(e) {
+    drawing = true;
+    draw(e);
+  }
+
+  function endPosition() {
+    drawing = false;
+    context.beginPath();
   }
 
   function addPokemon(card, pokemon) {
@@ -115,23 +131,28 @@
     imagesDiv.appendChild(res);
   }
 
-  function draw(event) {
+  function draw(e) {
     if (!drawing) return;
     cleared = false;
     context.lineWidth = 5;
     context.lineCap = "round";
     context.strokeStyle = "black";
 
-    context.lineTo(
-      event.clientX - canvas.offsetLeft,
-      event.clientY - canvas.offsetTop
-    );
+    let x, y;
+
+    if (e.type === "mousemove") {
+      x = e.clientX - canvas.offsetLeft;
+      y = e.clientY - canvas.offsetTop;
+    } else if (e.type === "touchmove") {
+      const touch = e.touches[0];
+      x = touch.clientX - canvas.offsetLeft;
+      y = touch.clientY - canvas.offsetTop;
+    }
+
+    context.lineTo(x, y);
     context.stroke();
     context.beginPath();
-    context.moveTo(
-      event.clientX - canvas.offsetLeft,
-      event.clientY - canvas.offsetTop
-    );
+    context.moveTo(x, y);
   }
 
   async function checkStatus(res) {
@@ -141,3 +162,4 @@
     return res;
   }
 })();
+

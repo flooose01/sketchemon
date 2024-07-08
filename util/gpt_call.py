@@ -28,8 +28,6 @@ class OpenAIClient:
 
     @retry(tries=3, delay=3.0)
     def get_completion(self, prompt: str, max_tokens: int = 128, n: int = 1):
-        load_dotenv()
-        openai.api_key = os.getenv("OPENAI_API_KEY")
 
         response = OpenAIClient.SINGLETON_OPENAI.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -46,5 +44,7 @@ class OpenAIClient:
 def gpt_client():
     if OpenAIClient.SINGLETON_CLIENT is None:
         OpenAIClient.SINGLETON_CLIENT = OpenAIClient()
+        load_dotenv()
+        openai.api_key = os.getenv("OPENAI_API_KEY")
         OpenAIClient.SINGLETON_OPENAI = OpenAI()
     return OpenAIClient.SINGLETON_CLIENT
