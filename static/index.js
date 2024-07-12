@@ -10,6 +10,8 @@
 
   function init() {
     canvas = document.getElementById("sketchCanvas");
+    canvas.height = screen.height * 0.6;
+    canvas.width = screen.height * 0.6;
     context = canvas.getContext("2d");
     drawing = false;
 
@@ -42,7 +44,8 @@
     document.getElementById("genButton").addEventListener("click", () => {
       const dataURL = canvas.toDataURL("image/png");
       const series = parseInt(document.getElementById("evolInput").value) + 1;
-
+      let statusMsg = document.getElementById("statusMsg");
+      statusMsg.textContent = "Generating...";
       let payload;
       if (cleared) {
         payload = JSON.stringify({ img_provided: false, series: series });
@@ -64,6 +67,8 @@
         .then(checkStatus)
         .then((response) => response.json())
         .then((data) => {
+          document.getElementById("statusMsg").textContent = "";
+
           // Remove the existing image first
           let div = document.getElementById("images");
           while (div.firstChild) {
@@ -157,6 +162,7 @@
 
   async function checkStatus(res) {
     if (!res.ok) {
+      document.getElementById("statusMsg").textContent = "Failed to generate. Try again!";
       throw new Error(await res.text());
     }
     return res;

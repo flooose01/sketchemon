@@ -10,7 +10,7 @@ from render_cards import render_card
 from util.img_util import pil_to_b64
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 pf = PokemonFactory(
     theme_style=Style(subject_type="pokemon"),
@@ -22,7 +22,9 @@ pf = PokemonFactory(
 def home():
     return render_template('index.html')
 
-
+@app.route('/hello')
+def hello():
+    return "hello3"
 
 @app.route('/generate', methods=['POST'])
 def generate():

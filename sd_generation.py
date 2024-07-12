@@ -28,13 +28,6 @@ def generate(pokemon:Pokemon, control_strength:float=0.5, output_file=None):
     # Decode response
     encoded_image = response.json()["image"]
 
-    decoded_image = base64.b64decode(encoded_image)
-    # Save and display result
-    if output_file is not None:
-        with open(output_file, "wb") as f:
-            f.write(decoded_image)
-        print(f"Saved image {output_file}")
-
     return encoded_image
 
 def generate_without_sketch(pokemon:Pokemon, output_file: str = None):
@@ -54,13 +47,6 @@ def generate_without_sketch(pokemon:Pokemon, output_file: str = None):
 
     # Decode response
     encoded_image = response.json()["image"]
-
-    decoded_image = base64.b64decode(encoded_image)
-    # Save and display result
-    if output_file is not None:
-        with open(output_file, "wb") as f:
-            f.write(decoded_image)
-        print(f"Saved image {output_file}")
 
     return encoded_image
 
@@ -84,13 +70,6 @@ def generate_evol(pokemon: Pokemon, output_file: str=None):
     encoded_image = response.json()["image"]
     decoded_image = base64.b64decode(encoded_image)
 
-    if output_file is not None:
-        # Write the decoded bytes to a file
-        with open(output_file, "wb") as image_file:
-            image_file.write(decoded_image)
-
-        print(f"Image saved as {output_file}")
-
     return encoded_image
 
 def getimg_send(url, payload):
@@ -104,7 +83,7 @@ def getimg_send(url, payload):
 
     print(f"Sending REST request to {url}")
     response = requests.post(url, json=payload, headers=headers)
-
+    print("Received from GetImg API")
     if not response.ok:
         raise Exception(f"HTTP {response.status_code}: {response.text}")
 

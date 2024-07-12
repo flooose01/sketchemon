@@ -93,10 +93,10 @@ class PokemonFactory:
 
 
         if sketch is not None:
-            card.curr_image = generate(card, 0.65, "images/base.png")
+            card.curr_image = generate(card, 0.7, None)
             pass
         else:
-            card.curr_image = generate_without_sketch(card, "images/base.png")
+            card.curr_image = generate_without_sketch(card, None)
             pass
 
         self.cards.append(card)
@@ -140,7 +140,7 @@ class PokemonFactory:
             card.name = generate_card_name(card)
             card.description = generate_desc(card)
 
-        card.curr_image = generate_evol(card, f"images/evol_{pokemon.series_index}.png")
+        card.curr_image = generate_evol(card, None)
 
         self.cards.append(card)
         return card

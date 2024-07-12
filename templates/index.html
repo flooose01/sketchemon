@@ -88,7 +88,7 @@
   </head>
   <body>
     <h1>Draw anything and generate a Fakemon</h1>
-    <canvas id="sketchCanvas" width="900" height="900"></canvas>
+    <canvas id="sketchCanvas"></canvas>
     <div id="btnContainer">
       <button id="genButton" class="btnClass">Generate Fakemon</button>
       <button id="clearButton" class="btnClass">Clear Sketch</button>
@@ -97,25 +97,8 @@
         <input type="number" id="evolInput" max="2" min="0" value="0" />
       </div>
     </div>
-    <div id="images">
-      <!-- <div class="pokemon-container">
-        <div class="image-container">
-          <img
-            src="static/evol_1.png"
-            alt="Pokémon Image"
-            class="pokemon-image"
-          />
-        </div>
-        <div class="description-container">
-          <h2 class="pokemon-name">Pikachu</h2>
-          <p class="pokemon-description">
-            Pikachu is an Electric-type Pokémon known for its yellow fur and
-            lightning bolt-shaped tail. It evolves from Pichu when leveled up
-            with high friendship and evolves into Raichu when exposed to a
-            Thunder Stone.
-          </p>
-        </div>
-      </div> -->
-    </div>
+    <h2 id="statusMsg"></h2>
+    <div id="images"></div>
   </body>
 </html>
+
